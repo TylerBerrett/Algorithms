@@ -26,26 +26,17 @@ import argparse
 
 
 def find_max_profit(prices):
-    lowest = prices[0]
-    highest = prices[len(prices) - 1]
-    highest_index = len(prices)
+    lowest = float('inf')
+    profit = -lowest
 
     for i in range(0, len(prices)):
         price = prices[i]
-        print(price, i)
-        if price < lowest and i <= highest_index:
+        if profit < price - lowest:
+            profit = price - lowest
+        if price < lowest:
             lowest = price
-        elif price > highest and i > 0:
-            highest = price
-            highest_index = i
 
-    return highest - lowest
-
-
-test1 = [1050, 270, 1540, 3800, 2]
-test2 = [10, 7, 5, 8, 11, 9]
-test3 = [100, 55, 4, 98, 10, 18, 90, 95, 43, 11, 47, 67, 89, 42, 49, 79]
-print(find_max_profit(test3))
+    return profit
 
 if __name__ == '__main__':
     # This is just some code to accept inputs from the command line
